@@ -1,0 +1,3 @@
+[run]
+source = herokutest
+omit = herokutest/test*
