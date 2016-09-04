@@ -19,6 +19,7 @@ requires = [
     'waitress',
 
     'requests',
+    'google-api-python-client',
     ]
 
 tests_require = [
