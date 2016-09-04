@@ -2,6 +2,7 @@ import os
 
 from pyramid.response import Response
 from pyramid.view import view_config
+from googleapiclient.errors import HttpError
 import googleapiclient.discovery as discovery
 from pprint import pformat
 
@@ -20,5 +21,8 @@ def my_view(request):
     info_query = elections.voterInfoQuery(
         address=request.params.get('address', SEATTLE_UNIVERSITY_ADDRESS)
     )
-    formatted_response = pformat(info_query.execute())
+    try:
+        formatted_response = pformat(info_query.execute())
+    except HttpError:
+        return Response('bad address?')
     return {'response': formatted_response}
